@@ -1,7 +1,9 @@
-import { game_panel_size } from "./Game.js";
+export const game_panel_size = 10;
 import { shipsTypes } from "./data/shipsTypes.js";
 class ShipsPosition {
-  constructor() {}
+  constructor() {
+    this.initialGameBoardData = this.createTemplateDataTable();
+  }
 
   createTemplateDataTable() {
     const data = [];
@@ -21,15 +23,39 @@ class ShipsPosition {
     }
     return data;
   }
+
   generateSingleIndex() {
     let field = {};
     field = {
       row: Math.floor(Math.random() * game_panel_size),
       column: Math.floor(Math.random() * game_panel_size),
     };
-
     if (this.checkIfItsOccupied(field)) return field;
     else return this.generateSingleIndex();
+  }
+
+  generateSingleShipLocation() {
+    //przypisz rozmiar statku
+    fields = 3;
+    let field = null;
+    //znajdź pierwsze pole
+    field = this.generateSingleIndex();
+    fields--;
+    //znajdz pozostałe pola
+    while (fields > 0) {
+      // utwórz zbiór w którym powinienes szukać kolejnego pola
+      const jackpot = this.possibleNextIndex(field.row, field.column);
+      // wylosuj kolejne pole
+      //sprawdz czy nie jest zajete
+    }
+
+    //zbuduj granice statku
+  }
+
+  checkIfItsOccupied(field) {
+    if (!this.initialGameBoardData[field.row][field.column].isOccupied) {
+      ///przypisz odpowiednie wartośći
+    }
   }
 
   possibleNextIndex(x, y) {
