@@ -46,10 +46,18 @@ class ShipsPosition {
       // utwórz zbiór w którym powinienes szukać kolejnego pola
       const jackpot = this.possibleNextIndex(field.row, field.column);
       // wylosuj kolejne pole
-      //sprawdz czy nie jest zajete
+      field = this.findRemainShipFieldsLocations(jackpot);
+      fields--;
     }
 
     //zbuduj granice statku
+  }
+
+  findRemainShipFieldsLocations(jackpot) {
+    let field = null;
+    field = jackpot[Math.floor(Math.random() * jackpot.length)];
+    if (this.checkIfItsOccupied(field)) return field;
+    else return this.findRemainShipFieldsLocations(jackpot);
   }
 
   checkIfItsOccupied(field) {
