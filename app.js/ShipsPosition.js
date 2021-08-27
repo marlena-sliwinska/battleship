@@ -2,7 +2,8 @@ export const game_panel_size = 10;
 import { shipsTypes } from "./data/shipsTypes.js";
 class ShipsPosition {
   constructor() {
-    this.initialGameBoardData = this.createTemplateDataTable();
+    this.shipsOnGame = shipsTypes;
+    this.initialGameBoardData = this.generateAllShipsLocation();
   }
 
   createTemplateDataTable() {
@@ -60,6 +61,13 @@ class ShipsPosition {
     else return this.findRemainShipFieldsLocations(jackpot);
   }
 
+  generateAllShipsLocation() {
+    const data = this.createTemplateDataTable();
+    this.shipsOnGame.forEach((ship) => {
+      this.generateSingleShipLocation(ship);
+    });
+    return data;
+  }
   checkIfItsOccupied(field) {
     if (!this.initialGameBoardData[field.row][field.column].isOccupied) {
       ///przypisz odpowiednie wartośći
