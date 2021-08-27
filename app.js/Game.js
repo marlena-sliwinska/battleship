@@ -1,16 +1,20 @@
 import { field } from "./Field.js";
+import { shipsPosition } from "./ShipsPosition.js";
 
-const game_panel_size = 10;
+export const game_panel_size = 10;
 const game_panel_id = "game__panel";
 
 class Game {
   constructor() {
     this.gameBoard = document.getElementById(game_panel_id);
-    console.log(this.gameBoard);
+    this.gameBoardData = [];
     this.initializeGame();
   }
   initializeGame() {
     this.drawFieldsOnBoard();
+    /* this.gameBoardData = shipsPosition.generateAllShipsLocation(); */
+    this.gameBoardData = shipsPosition.createTemplateDataTable();
+    console.log(this.gameBoardData);
   }
 
   drawFieldsOnBoard() {
