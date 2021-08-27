@@ -1,0 +1,38 @@
+:root {
+    --basic-game-board-color: #084c61ff;
+    --darker-border-color: rgb(6, 27, 34);
+    --brighter-border-color: rgb(228, 228, 228);
+    --basic-text-color: #d7eae3ff;
+    --dark-olive-green: #546732ff;
+    --lemon-curry: #b49104ff;
+    --antique-bronze: #6a6225ff;
+    --pale-spring-bud: #d9dabeff;
+    --xanadu: #747f5dff;
+    --teal-blue: #517b85ff;
+    --steel-teal: #538890ff;
+    --field-size: 70px;
+    --field-border-width: 1,5px
+    }
+    
+    @font-face {
+        font-family: 'codystar-regular';
+        src: url(/assets/fonts/Codystar-Regular.ttf);
+    }
+    @font-face {
+        font-family: 'titillium';
+        src: url(/assets/fonts/TitilliumWeb-1eq2.ttf);
+    }
+    
+    
+    html {
+        font-family: 'titillium';;
+        box-sizing: border-box;
+        background-color: var(--pale-spring-bud);
+    }
+    
+    *,*:before, *:after{
+        font-family: inherit;
+        box-sizing: inherit;
+        padding: 0;
+        margin: 0;
+    }
