@@ -21,6 +21,16 @@ class ShipsPosition {
     }
     return data;
   }
+  generateSingleIndex() {
+    let field = {};
+    field = {
+      row: Math.floor(Math.random() * game_panel_size),
+      column: Math.floor(Math.random() * game_panel_size),
+    };
+
+    if (this.checkIfItsOccupied(field)) return field;
+    else return this.generateSingleIndex();
+  }
 
   possibleNextIndex(x, y) {
     let jakpot = [];
