@@ -74,6 +74,7 @@ class ShipsPosition {
     }
 
     //zbuduj granice statku
+    this.generateShipBoundaries(ship);
   }
 
   findRemainShipFieldsLocations(jackpot, ship) {
@@ -83,6 +84,24 @@ class ShipsPosition {
     else return this.findRemainShipFieldsLocations(jackpot, ship);
   }
 
+  generateShipBoundaries() {
+    for (let row = 0; row < game_panel_size; row++) {
+      for (let column = 0; column < game_panel_size; column++) {
+        if (this.initialGameBoardData[row][column].isOccupied) {
+          const neighbours = this.findNeighbours(row, column);
+          neighbours.forEach((neighbour) => {
+            if (
+              !this.initialGameBoardData[neighbour.row][neighbour.column]
+                .isOccupied
+            )
+              this.initialGameBoardData[neighbour.row][
+                neighbour.column
+              ].isNeighbour = true;
+          });
+        }
+      }
+    }
+  }
   generateAllShipsLocation() {
     const data = this.initialGameBoardData;
     this.shipsOnGame.forEach((ship) => {
@@ -90,6 +109,7 @@ class ShipsPosition {
     });
     return data;
   }
+
   checkIfItsOccupied(field, ship) {
     const { row, column } = field;
     const { name, id } = ship;
