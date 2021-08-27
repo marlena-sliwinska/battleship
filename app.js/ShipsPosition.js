@@ -4,24 +4,26 @@ class ShipsPosition {
   constructor() {
     this.shipsOnGame = shipsTypes;
     this.initialGameBoardData = this.createTemplateDataTable();
+    this.generateAllShipsLocation();
+    console.log(this.initialGameBoardData);
   }
 
   createTemplateDataTable() {
     const data = [];
-    const singleDataCell = {
-      isOccupied: false,
-      isNeighbour: false,
-      shipName: null,
-      shipId: null,
-      isRevealed: false,
-    };
-
     for (let row = 0; row < game_panel_size; row++) {
       data[row] = [];
       for (let column = 0; column < game_panel_size; column++) {
-        data[row].push(singleDataCell);
+        data[row].push({
+          isOccupied: false,
+          isNeighbour: false,
+          shipName: null,
+          shipId: null,
+          isRevealed: false,
+        });
       }
     }
+
+    console.log(data);
     return data;
   }
 
@@ -31,14 +33,16 @@ class ShipsPosition {
       row: Math.floor(Math.random() * game_panel_size),
       column: Math.floor(Math.random() * game_panel_size),
     };
-    if (this.checkIfItsOccupied(field, ship)) return field;
-    else return this.generateSingleIndex(ship);
+    if (this.checkIfItsOccupied(field, ship)) {
+      return field;
+    } else return this.generateSingleIndex(ship);
   }
 
   generateSingleShipLocation(ship) {
     //przypisz rozmiar statku
-    let fields = 3;
+    let fields = ship.size;
     let field = null;
+
     //znajdź pierwsze pole
     field = this.generateSingleIndex(ship);
     fields--;
@@ -69,14 +73,15 @@ class ShipsPosition {
     return data;
   }
   checkIfItsOccupied(field, ship) {
-    console.log(this.initialGameBoardData);
-    console.log(field, ship);
-    if (!this.initialGameBoardData[field.row][field.column].isOccupied) {
-      this.initialGameBoardData[field.row][field.column].isOccupied = true;
-      this.initialGameBoardData[field.row][field.column].isNeighbour = false;
-      this.initialGameBoardData[field.row][field.column].shipName = ship.name;
-      this.initialGameBoardData[field.row][field.column].shipId = ship.id;
-      this.initialGameBoardData[field.row][field.column].isRevealed = false;
+    const { row, column } = field;
+    const { name, id } = ship;
+    if (!this.initialGameBoardData[row][column].isOccupied) {
+      this.initialGameBoardData[row][column].isOccupied = true;
+      this.initialGameBoardData[row][column].isNeighbour = false;
+      this.initialGameBoardData[row][column].isRevealed = false;
+      this.initialGameBoardData[row][column].shipId = id;
+      this.initialGameBoardData[row][column].shipName = name;
+      return true;
     }
   }
 
