@@ -4,10 +4,31 @@ class ShipsPosition {
   constructor() {
     this.shipsOnGame = shipsTypes;
     this.initialGameBoardData = this.createTemplateDataTable();
+    this.initialShipsGameData = this.createShipsOnBoardSummary();
+    console.log(this.initialShipsGameData);
     this.generateAllShipsLocation();
-    console.log(this.initialGameBoardData);
+  }
+  createShipsOnBoardSummary() {
+    const data = [];
+    shipsTypes.forEach((item) => {
+      data.push({
+        shipId: item.id,
+        shipName: item.name,
+        shipSize: item.size,
+        shipCurrentLifes: item.size,
+        isDestroyed: false,
+        occupiedFields: [],
+      });
+    });
+    return data;
   }
 
+  addShipsLocationsToSummary(id, field) {
+    this.initialShipsGameData.forEach((data, index) => {
+      if (data.shipId === id)
+        this.initialShipsGameData[index].occupiedFields.push(field);
+    });
+  }
   createTemplateDataTable() {
     const data = [];
     for (let row = 0; row < game_panel_size; row++) {
@@ -22,8 +43,6 @@ class ShipsPosition {
         });
       }
     }
-
-    console.log(data);
     return data;
   }
 
@@ -81,6 +100,9 @@ class ShipsPosition {
       this.initialGameBoardData[row][column].isRevealed = false;
       this.initialGameBoardData[row][column].shipId = id;
       this.initialGameBoardData[row][column].shipName = name;
+
+      this.addShipsLocationsToSummary(id, field);
+
       return true;
     }
   }
