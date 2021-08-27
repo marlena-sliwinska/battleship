@@ -5,7 +5,6 @@ class ShipsPosition {
     this.shipsOnGame = shipsTypes;
     this.initialGameBoardData = this.createTemplateDataTable();
     this.initialShipsGameData = this.createShipsOnBoardSummary();
-    console.log(this.initialShipsGameData);
     this.generateAllShipsLocation();
   }
   createShipsOnBoardSummary() {
@@ -94,7 +93,10 @@ class ShipsPosition {
   checkIfItsOccupied(field, ship) {
     const { row, column } = field;
     const { name, id } = ship;
-    if (!this.initialGameBoardData[row][column].isOccupied) {
+    if (
+      !this.initialGameBoardData[row][column].isOccupied &&
+      !this.initialGameBoardData[row][column].isNeighbour
+    ) {
       this.initialGameBoardData[row][column].isOccupied = true;
       this.initialGameBoardData[row][column].isNeighbour = false;
       this.initialGameBoardData[row][column].isRevealed = false;
@@ -186,6 +188,118 @@ class ShipsPosition {
       ];
     }
     return jakpot;
+  }
+  findNeighbours(x, y) {
+    let neighbours = [];
+    if (x == 0 && y == 0) {
+      neighbours = [
+        //right
+        { row: x + 1, column: y },
+        //bottom
+        { row: x, column: y + 1 },
+        //corner
+        { row: x + 1, column: y + 1 },
+      ];
+    } else if (x == 0 && y == game_panel_size - 1) {
+      neighbours = [
+        //up
+        { row: x, column: y - 1 },
+        //right
+        { row: x + 1, column: y },
+        //corner
+        { row: x + 1, column: y - 1 },
+      ];
+    } else if (x == game_panel_size - 1 && y == game_panel_size - 1) {
+      neighbours = [
+        //up
+        { row: x, column: y - 1 },
+        //left
+        { row: x - 1, column: y },
+        //corner
+        { row: x - 1, column: y - 1 },
+      ];
+    } else if (x == game_panel_size - 1 && y == 0) {
+      neighbours = [
+        //bottom
+        { row: x, column: y + 1 },
+        //left
+        { row: x - 1, column: y },
+        //corner
+        { row: x - 1, column: y + 1 },
+      ];
+    } else if (x == 0) {
+      neighbours = [
+        //up
+        { row: x, column: y - 1 },
+        //right
+        { row: x + 1, column: y },
+        //bottom
+        { row: x, column: y + 1 },
+        //corner
+        { row: x + 1, column: y - 1 },
+        //corner
+        { row: x + 1, column: y + 1 },
+      ];
+    } else if (y == game_panel_size - 1) {
+      neighbours = [
+        //up
+        { row: x, column: y - 1 },
+        //right
+        { row: x + 1, column: y },
+        //left
+        { row: x - 1, column: y },
+        //corner
+        { row: x + 1, column: y - 1 },
+        //corner
+        { row: x - 1, column: y - 1 },
+      ];
+    } else if (x == game_panel_size - 1) {
+      neighbours = [
+        //up
+        { row: x, column: y - 1 },
+        //bottom
+        { row: x, column: y + 1 },
+        //left
+        { row: x - 1, column: y },
+        //corner
+        { row: x - 1, column: y + 1 },
+        //corner
+        { row: x - 1, column: y - 1 },
+      ];
+    } else if (y == 0) {
+      neighbours = [
+        //right
+        { row: x + 1, column: y },
+        //bottom
+        { row: x, column: y + 1 },
+        //left
+        { row: x - 1, column: y },
+        //corner
+        { row: x + 1, column: y + 1 },
+        //corner
+        { row: x - 1, column: y + 1 },
+      ];
+    } else {
+      neighbours = [
+        //up
+        { row: x, column: y - 1 },
+        //right
+        { row: x + 1, column: y },
+        //bottom
+        { row: x, column: y + 1 },
+        //left
+        { row: x - 1, column: y },
+        //corner
+        { row: x - 1, column: y - 1 },
+        //corner
+        { row: x - 1, column: y + 1 },
+        //corner
+        { row: x + 1, column: y + 1 },
+        //corner
+        { row: x + 1, column: y - 1 },
+      ];
+    }
+    return neighbours;
   }
 }
 
