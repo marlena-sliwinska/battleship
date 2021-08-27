@@ -3,7 +3,7 @@ import { shipsTypes } from "./data/shipsTypes.js";
 class ShipsPosition {
   constructor() {
     this.shipsOnGame = shipsTypes;
-    this.initialGameBoardData = this.generateAllShipsLocation();
+    this.initialGameBoardData = this.createTemplateDataTable();
   }
 
   createTemplateDataTable() {
@@ -25,52 +25,58 @@ class ShipsPosition {
     return data;
   }
 
-  generateSingleIndex() {
+  generateSingleIndex(ship) {
     let field = {};
     field = {
       row: Math.floor(Math.random() * game_panel_size),
       column: Math.floor(Math.random() * game_panel_size),
     };
-    if (this.checkIfItsOccupied(field)) return field;
-    else return this.generateSingleIndex();
+    if (this.checkIfItsOccupied(field, ship)) return field;
+    else return this.generateSingleIndex(ship);
   }
 
-  generateSingleShipLocation() {
+  generateSingleShipLocation(ship) {
     //przypisz rozmiar statku
-    fields = 3;
+    let fields = 3;
     let field = null;
     //znajdź pierwsze pole
-    field = this.generateSingleIndex();
+    field = this.generateSingleIndex(ship);
     fields--;
     //znajdz pozostałe pola
     while (fields > 0) {
       // utwórz zbiór w którym powinienes szukać kolejnego pola
       const jackpot = this.possibleNextIndex(field.row, field.column);
       // wylosuj kolejne pole
-      field = this.findRemainShipFieldsLocations(jackpot);
+      field = this.findRemainShipFieldsLocations(jackpot, ship);
       fields--;
     }
 
     //zbuduj granice statku
   }
 
-  findRemainShipFieldsLocations(jackpot) {
+  findRemainShipFieldsLocations(jackpot, ship) {
     let field = null;
     field = jackpot[Math.floor(Math.random() * jackpot.length)];
-    if (this.checkIfItsOccupied(field)) return field;
-    else return this.findRemainShipFieldsLocations(jackpot);
+    if (this.checkIfItsOccupied(field, ship)) return field;
+    else return this.findRemainShipFieldsLocations(jackpot, ship);
   }
 
   generateAllShipsLocation() {
-    const data = this.createTemplateDataTable();
+    const data = this.initialGameBoardData;
     this.shipsOnGame.forEach((ship) => {
       this.generateSingleShipLocation(ship);
     });
     return data;
   }
-  checkIfItsOccupied(field) {
+  checkIfItsOccupied(field, ship) {
+    console.log(this.initialGameBoardData);
+    console.log(field, ship);
     if (!this.initialGameBoardData[field.row][field.column].isOccupied) {
-      ///przypisz odpowiednie wartośći
+      this.initialGameBoardData[field.row][field.column].isOccupied = true;
+      this.initialGameBoardData[field.row][field.column].isNeighbour = false;
+      this.initialGameBoardData[field.row][field.column].shipName = ship.name;
+      this.initialGameBoardData[field.row][field.column].shipId = ship.id;
+      this.initialGameBoardData[field.row][field.column].isRevealed = false;
     }
   }
 
