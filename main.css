@@ -36,3 +36,42 @@
         padding: 0;
         margin: 0;
     }
+
+    body {
+        height: 100vh;
+        display: flex;;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .game__panel {
+        width: calc(10*var(--field-size));
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .game__single-field {
+      
+        width: var(--field-size);
+        height: var(--field-size);
+        background-color: var(--basic-game-board-color);
+        color: var(--basic-text-color);
+        font-size: 40px;
+        text-align: center;
+        flex-shrink: 0;
+    
+    }
+
+    .border {
+        border-style: solid;
+        border-width: var(--field-border-width);
+        
+    }
+    .border-pressed {
+        border-color:  var(--darker-border-color) var(--brighter-border-color) var(--brighter-border-color) var(--darker-border-color);
+    }
+    .border-raised {
+        border-color:var(--brighter-border-color) var(--darker-border-color) var(--brighter-border-color) var(--darker-border-color) ;
+    }
