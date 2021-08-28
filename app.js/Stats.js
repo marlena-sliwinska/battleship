@@ -32,7 +32,6 @@ class Stats {
   } */
 
   summarizeShipsTypes() {
-    console.log("countTotalShipsByType");
     const ships = this.shipsOnBoardData;
     const data = [];
     ships.forEach((ship) => {
@@ -44,7 +43,6 @@ class Stats {
   countTotalShipsByType() {
     const shipsTypes = this.summarizeShipsTypes();
     const ships = this.shipsOnBoardData;
-    console.log(shipsTypes);
     const data = [];
     for (let i = 0; i < shipsTypes.length; i++) {
       let quantity = 0;
@@ -60,29 +58,27 @@ class Stats {
     return data;
   }
 
-  updateAllStatistics(shipData) {
-    this.updateshipsOnBoardData(shipData);
-    this.renderStats();
-    /*  this.countAllNotDestroyedShips(); */
-  }
-  updateshipsOnBoardData(shipData) {
+  updateStatistics(shipData) {
+    let isDestroyed = null;
     this.shipsOnBoardData.forEach((ship) => {
       if (ship.shipId === shipData.shipId) {
         ship.shipCurrentLifes--;
         if (ship.shipCurrentLifes === 0) {
+          isDestroyed = true;
+
           ship.isDestroyed = true;
-          console.log(this.shipsByTypesStatistic);
+
           this.currentlyDestroyedShipsOnBoard++;
+
           this.shipsByTypesStatistic.forEach((element) => {
-            element.typeName === ship.shipName
-              ? element.destroyedQuantity++
-              : null;
+            if (element.typeName === ship.shipName) {
+              element.destroyedQuantity++;
+            }
           });
-          return true;
-        }
+        } else isDestroyed = false;
       }
-      return false;
     });
+    return isDestroyed;
   }
 }
 

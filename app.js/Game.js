@@ -58,7 +58,10 @@ class Game {
       row: row,
       column: column,
     };
-    this.statistics.updateAllStatistics(shipData);
+    const isDestroyed = this.statistics.updateStatistics(shipData);
+    if (isDestroyed) {
+      this.statistics.renderStats();
+    }
   }
   checkIfRevealed(row, column, btn) {
     if (this.gameBoardData[row][column].isRevealed) return true;
