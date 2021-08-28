@@ -23,7 +23,11 @@ class Messege {
     const finalBoard = document.createElement("section");
     finalBoard.appendChild(resultMessage);
     this.renderMessege(finalBoard);
-    setTimeout(() => this.clearMessegeBoard(), 2000);
+    const hidingModalTimeoutIndex = setTimeout(
+      () => this.clearMessegeBoard(),
+      1500
+    );
+    return hidingModalTimeoutIndex;
   }
 
   winMessege() {
@@ -55,6 +59,7 @@ class Messege {
     quoteElement.appendChild(quoteAuthorElement);
     return quoteElement;
   }
+
   clearMessegeBoard() {
     this.messegeBoard.classList.add(inactive_className);
     this.messegeBoard.innerHTML = "";

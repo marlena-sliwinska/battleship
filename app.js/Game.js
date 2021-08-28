@@ -67,10 +67,12 @@ class Game {
     const isDestroyed = this.statistics.updateStatistics(shipData);
     if (isDestroyed) {
       this.statistics.renderStats();
-      messege.singleShipDestroyedMessege(isDestroyed);
+      const hidingModalTimeoutIndex =
+        messege.singleShipDestroyedMessege(isDestroyed);
 
       if (this.statistics.checkIfWin()) {
-        console.log("wygrałeś gre");
+        messege.clearMessegeBoard();
+        clearTimeout(hidingModalTimeoutIndex);
         const finalBoard = messege.winMessege();
         messege.renderMessege(finalBoard);
       }
