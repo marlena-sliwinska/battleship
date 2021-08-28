@@ -4,6 +4,8 @@ const win_messege_content = "Congratulations! Victory is yours";
 const messegeText_className = "game__textMessage";
 const messegeQuote_className = "game__textMessage--quote";
 const messegeQuoteAuthor_className = "game__textMessage--author";
+const button_className = "game__button";
+export const playAgainButtonId = "playAgainButton";
 
 import { win_quoutes } from "./data/quotes.js";
 
@@ -36,9 +38,13 @@ class Messege {
     resultMessage.textContent = win_messege_content;
     resultMessage.classList.add(messegeText_className);
     const finalBoard = document.createElement("section");
-    /*     finalBoard.appendChild(resultMessage, winQuote);
-     */ finalBoard.appendChild(resultMessage);
+    finalBoard.appendChild(resultMessage);
     finalBoard.appendChild(winQuote);
+    const playAgain = document.createElement(`button`);
+    playAgain.setAttribute("id", playAgainButtonId);
+    playAgain.textContent = "Let's play again !";
+    playAgain.classList.add(button_className);
+    finalBoard.appendChild(playAgain);
     return finalBoard;
   }
 
