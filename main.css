@@ -9,9 +9,9 @@
     --pale-spring-bud: #d9dabeff;
     --xanadu: #747f5dff;
     --teal-blue: #517b85ff;
-    --steel-teal: #538890ff;
+    --modal-board-color: rgb(27, 67, 73);
     --field-size: 3.5rem;
-    --field-border-width: 1.8px
+    --field-border-width: 2.5px
     }
     
 
@@ -23,6 +23,11 @@
     @font-face {
         font-family: 'starlight';
         src: url(/assets/fonts/Starlight.ttf);
+    }    
+
+    @font-face {
+        font-family: 'dancingScripts';
+        src: url(/assets/fonts/DancingScript-VariableFont_wght.ttf);
     }    
     html {
         font-family: 'titillium';;
@@ -45,7 +50,7 @@
     }
     .game__header {
        /*  background-color: var(--brighter-border-color); */
-    }
+    } 
     .game__name {
 
         font-family: 'starlight';
@@ -55,10 +60,10 @@
     }
 
     .game__catchword {
-        font-family: 32px;
+        font-size: 24px;
         margin-bottom: 16px;
     }
-    .game__resetButton {
+    .game__button {
         border: none;
         background: #404040;
         color: #ffffff; 
@@ -70,7 +75,7 @@
         transition: all 0.5s ease-out ;
     }
 
-    .game__resetButton:hover {
+    .game__button:hover {
         color: #404040;
         background-color: #ffffff;
         letter-spacing: 2px;
@@ -94,16 +99,13 @@
         background-color: var(--basic-game-board-color);
         color: var(--basic-text-color);
         flex-shrink: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+ 
     }
     
 
     .border {
         border-style: solid;
         border-width: var(--field-border-width);
-        
     }
     .border-pressed {
         border-color:  var(--darker-border-color) var(--brighter-border-color) var(--brighter-border-color) var(--darker-border-color);
@@ -116,29 +118,56 @@
   
 
     .game__messege {
-        background-color: rgba(255, 0, 0, 0.856);
-        width: 100vw;
-        height: 100vh;
+        background-color: var(--modal-board-color);
+        opacity: 0.97;
+        border-radius: 10px;
+        box-shadow: 0 10px 50px 5px var(--darker-border-color);
+        width: 60vw;
+        min-height: 75vh;
         position: fixed;
-        top: 0;
-        left: 0; 
-        color: white;
+        top: 50%;
+        left: 50%; 
         text-align: center;
-        font-size: 32px; 
         display: flex;
         flex-flow: column;
         justify-content: center;
+        transform: translate(-50%,-50%); 
+       
     }
 
     .game__textMessage {
-        color: yellow;
+        color: var(--basic-text-color);
+        font-size: 32px; 
+        padding: 40px;
+        text-shadow: #ffffff 1px 0 1.5px;
+        letter-spacing: 2px;
+     
+       /*  line-height: 100%; */
 
     }
     .game__textMessage--quote {
-        color: pink;
+        font-family: 'dancingScripts';
+        font-style: italic;
+        padding-bottom: 20px;
+        font-size: 32px;
+         quotes: '"' '"';
+        
     }
+     .game__textMessage--quote::before {
+        content: open-quote;
+    } 
+       .game__textMessage--quote::after {
+        content: close-quote;
+    } 
+
     .game__textMessage--author {
-        color: plum;
+        font-family: 'dancingScripts';
+        font-style: italic;
+        padding-bottom: 80px;
+        font-size: 24px;
+    }
+    .game__textMessage--author::before {
+        content: " - ";
     }
 
     .inactive {
@@ -146,7 +175,7 @@
     }
 
     .svg {
-        padding: 2px;
+        padding: 1.5px;
         width: 100%;
         height: 100%;
     }
