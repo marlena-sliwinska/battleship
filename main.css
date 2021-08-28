@@ -10,20 +10,20 @@
     --xanadu: #747f5dff;
     --teal-blue: #517b85ff;
     --steel-teal: #538890ff;
-    --field-size: 70px;
-    --field-border-width: 1,5px
+    --field-size: 3.5rem;
+    --field-border-width: 1.8px
     }
     
-    @font-face {
-        font-family: 'codystar-regular';
-        src: url(/assets/fonts/Codystar-Regular.ttf);
-    }
+
     @font-face {
         font-family: 'titillium';
         src: url(/assets/fonts/TitilliumWeb-1eq2.ttf);
     }
-    
-    
+
+    @font-face {
+        font-family: 'starlight';
+        src: url(/assets/fonts/Starlight.ttf);
+    }    
     html {
         font-family: 'titillium';;
         box-sizing: border-box;
@@ -43,7 +43,10 @@
         justify-content: center;
         align-items: center;
     }
-
+    .game__name {
+        font-family: 'starlight';
+        font-size: 48px;
+    }
     .game__panel {
         width: calc(10*var(--field-size));
         display: flex;
