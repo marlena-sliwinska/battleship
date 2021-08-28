@@ -4,7 +4,7 @@ import { game_panel_size } from "./ShipsPosition.js";
 
 import { shipsPosition } from "./ShipsPosition.js";
 
-import { stats } from "./Stats.js";
+import Stats from "./Stats.js";
 
 import { game__single__field__className } from "./Field.js";
 import { game__border__raised__className } from "./Field.js";
@@ -16,16 +16,17 @@ class Game {
   constructor() {
     this.gameBoard = document.getElementById(game_panel_id);
     this.gameBoardData = [];
+    this.shipsData = [];
     this.initializeGame();
-    /*   console.log(this.gameBoardData); */
-    this.stats = stats;
   }
   initializeGame() {
     this.drawFieldsOnBoard();
-    /* this.gameBoardData = shipsPosition.generateAllShipsLocation(); */
     this.gameBoardData = shipsPosition.initialGameBoardData;
-    /*  console.log(this.gameBoardData); */
     this.getButtons();
+    this.shipsData = shipsPosition.initialShipsGameData;
+    this.statistics = new Stats(this.shipsData);
+    this.statistics.initializeStats();
+    this.statistics.renderStats();
   }
 
   drawFieldsOnBoard() {
@@ -46,26 +47,34 @@ class Game {
     }
   }
   checkThisField(e) {
-    const button = e.target;
     const row = e.target.getAttribute("data-row");
     const column = e.target.getAttribute("data-column");
-    console.log(row, column, e.target);
-    this.checkIfButtonIsRevealed(row, column, e.target);
+    const alreadyRevealed = this.checkIfRevealed(row, column, e.target);
+    if (alreadyRevealed) return;
+    const isOccupied = this.checkIfElementIsOccupied(row, column, e.target);
+    if (!isOccupied) return;
+    const shipData = {
+      shipId: this.gameBoardData[row][column].shipId,
+      row: row,
+      column: column,
+    };
+    this.statistics.updateAllStatistics(shipData);
   }
-  checkIfButtonIsRevealed(row, column, btn) {
-    if (this.gameBoardData[row][column].isRevealed) return;
+  checkIfRevealed(row, column, btn) {
+    if (this.gameBoardData[row][column].isRevealed) return true;
     else {
       btn.classList.remove(game__border__raised__className);
       btn.classList.add(game__border__pressed__className);
       this.gameBoardData[row][column].isRevealed = true;
-      console.log(this.gameBoardData);
-      this.checkIfElementIsOccupied(row, column, btn);
+      return false;
     }
   }
+
   checkIfElementIsOccupied(row, column, btn) {
-    if (!this.gameBoardData[row][column].isOccupied) return;
+    if (!this.gameBoardData[row][column].isOccupied) return false;
     else {
       btn.textContent = "X";
+      return true;
     }
   }
 }
