@@ -34,7 +34,6 @@ class Stats {
   summarizeShipsTypes() {
     console.log("countTotalShipsByType");
     const ships = this.shipsOnBoardData;
-    console.log(ships);
     const data = [];
     ships.forEach((ship) => {
       !data.includes(ship.shipName) ? data.push(ship.shipName) : null;
@@ -61,21 +60,29 @@ class Stats {
     return data;
   }
 
-  decreaseShipLifes(shipData) {
-    this.shipsOnBoardData.forEach((ship) => {
-      if (ship.shipId === shipData.shipId) ship.shipCurrentLifes--;
-      if (ship.shipCurrentLifes === 0) {
-        ship.isDestroyed = true;
-        console.log("zabiłes ten statek");
-      }
-    });
-  }
-  updateAllStatistics() {
-    console.log("update");
+  updateAllStatistics(shipData) {
+    this.updateshipsOnBoardData(shipData);
+    this.renderStats();
     /*  this.countAllNotDestroyedShips(); */
   }
-  updateShipsGameData() {
-    console.log("updateShipsGameData");
+  updateshipsOnBoardData(shipData) {
+    this.shipsOnBoardData.forEach((ship) => {
+      if (ship.shipId === shipData.shipId) {
+        ship.shipCurrentLifes--;
+        if (ship.shipCurrentLifes === 0) {
+          ship.isDestroyed = true;
+          console.log(this.shipsByTypesStatistic);
+          this.currentlyDestroyedShipsOnBoard++;
+          this.shipsByTypesStatistic.forEach((element) => {
+            element.typeName === ship.shipName
+              ? element.destroyedQuantity++
+              : null;
+          });
+          return true;
+        }
+      }
+      return false;
+    });
   }
 }
 
