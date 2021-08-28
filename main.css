@@ -1,5 +1,5 @@
 :root {
-    --basic-game-board-color: #084c61ff;
+    --basic-game-board-color: rgb(76, 127, 145);
     --darker-border-color: rgb(6, 27, 34);
     --brighter-border-color: rgb(228, 228, 228);
     --basic-text-color: #d7eae3ff;
@@ -11,7 +11,7 @@
     --teal-blue: #517b85ff;
     --modal-board-color: rgb(27, 67, 73);
     --field-size: 3.5rem;
-    --field-border-width: 2.5px
+    --field-border-width: 3px
     }
     
 
