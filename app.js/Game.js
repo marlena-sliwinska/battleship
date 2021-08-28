@@ -8,7 +8,7 @@ import { game__border__raised__className } from "./Field.js";
 const game__border__pressed__className = "border-pressed";
 const game_panel_id = "game__panel";
 const reset_button_id = "reset_button";
-
+const shipImage = `<div class="svg"><svg class="svg"><use href="/assets/images/sprite.svg#ship"></use></svg>`;
 class Game {
   constructor() {
     this.gameBoard = document.querySelector(`section#${game_panel_id}`);
@@ -90,7 +90,7 @@ class Game {
   checkIfElementIsOccupied(row, column, btn) {
     if (!this.gameBoardData[row][column].isOccupied) return false;
     else {
-      btn.textContent = "X";
+      btn.innerHTML = shipImage;
       return true;
     }
   }

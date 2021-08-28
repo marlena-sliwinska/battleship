@@ -89,16 +89,16 @@
     }
 
     .game__single-field {
-      
         width: var(--field-size);
         height: var(--field-size);
         background-color: var(--basic-game-board-color);
         color: var(--basic-text-color);
-        font-size: 40px;
-        text-align: center;
         flex-shrink: 0;
-    
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+    
 
     .border {
         border-style: solid;
@@ -107,10 +107,10 @@
     }
     .border-pressed {
         border-color:  var(--darker-border-color) var(--brighter-border-color) var(--brighter-border-color) var(--darker-border-color);
+      
     }
     .border-raised {
         border-color:var(--brighter-border-color) var(--darker-border-color) var(--brighter-border-color) var(--darker-border-color) ;
-
     }
 
   
@@ -143,4 +143,10 @@
 
     .inactive {
         display: none;
+    }
+
+    .svg {
+        padding: 2px;
+        width: 100%;
+        height: 100%;
     }
