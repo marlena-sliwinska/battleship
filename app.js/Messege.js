@@ -11,13 +11,20 @@ class Messege {
   constructor() {
     this.messegeBoard = document.getElementById(messege_Id);
   }
-  renderMessege() {
+  renderMessege(finalBoard) {
     this.messegeBoard.classList.remove(inactive_className);
-    const finalBoard = this.winMessege();
     this.messegeBoard.appendChild(finalBoard);
   }
 
-  singleShipDestroyedMessege;
+  singleShipDestroyedMessege(shipName) {
+    const resultMessage = document.createElement("h2");
+    resultMessage.textContent = `You have just destroyed The ${shipName}`;
+    resultMessage.classList.add(messegeText_className);
+    const finalBoard = document.createElement("section");
+    finalBoard.appendChild(resultMessage);
+    this.renderMessege(finalBoard);
+    setTimeout(() => this.clearMessegeBoard(), 2000);
+  }
 
   winMessege() {
     const winQuote = this.createQuoteMessege(win_quoutes);
@@ -25,8 +32,8 @@ class Messege {
     resultMessage.textContent = win_messege_content;
     resultMessage.classList.add(messegeText_className);
     const finalBoard = document.createElement("section");
-    finalBoard.appendChild(resultMessage, winQuote);
-    finalBoard.appendChild(resultMessage);
+    /*     finalBoard.appendChild(resultMessage, winQuote);
+     */ finalBoard.appendChild(resultMessage);
     finalBoard.appendChild(winQuote);
     return finalBoard;
   }
@@ -47,6 +54,10 @@ class Messege {
     quoteElement.appendChild(quoteContentElement);
     quoteElement.appendChild(quoteAuthorElement);
     return quoteElement;
+  }
+  clearMessegeBoard() {
+    this.messegeBoard.classList.add(inactive_className);
+    this.messegeBoard.innerHTML = "";
   }
 }
 export const messege = new Messege();
