@@ -1,6 +1,6 @@
 export const game_panel_size = 10;
 import { shipsTypes } from "./data/shipsTypes.js";
-class ShipsPosition {
+export class ShipsPosition {
   constructor() {
     this.shipsOnGame = shipsTypes;
     this.initialGameBoardData = this.createTemplateDataTable();
@@ -322,5 +322,3 @@ class ShipsPosition {
     return neighbours;
   }
 }
-
-export const shipsPosition = new ShipsPosition();

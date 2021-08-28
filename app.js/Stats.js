@@ -1,4 +1,4 @@
-import { shipsPosition } from "./ShipsPosition.js";
+/* import { shipsPosition } from "./ShipsPosition.js"; */
 
 const box_on_game_board_withs_tats_id = "statistic board";
 
@@ -64,12 +64,9 @@ class Stats {
       if (ship.shipId === shipData.shipId) {
         ship.shipCurrentLifes--;
         if (ship.shipCurrentLifes === 0) {
-          isDestroyed = true;
-
+          isDestroyed = ship.shipName;
           ship.isDestroyed = true;
-
           this.currentlyDestroyedShipsOnBoard++;
-
           this.shipsByTypesStatistic.forEach((element) => {
             if (element.typeName === ship.shipName) {
               element.destroyedQuantity++;
@@ -79,6 +76,11 @@ class Stats {
       }
     });
     return isDestroyed;
+  }
+  checkIfWin() {
+    return this.currentlyDestroyedShipsOnBoard === this.totalShipsOnBoard
+      ? true
+      : false;
   }
 }
 

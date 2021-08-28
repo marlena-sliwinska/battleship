@@ -1,32 +1,38 @@
+import { messege } from "./Messege.js";
 import { field } from "./Field.js";
-
 import { game_panel_size } from "./ShipsPosition.js";
-
-import { shipsPosition } from "./ShipsPosition.js";
-
+import { ShipsPosition } from "./ShipsPosition.js";
 import Stats from "./Stats.js";
-
 import { game__single__field__className } from "./Field.js";
 import { game__border__raised__className } from "./Field.js";
-
 const game__border__pressed__className = "border-pressed";
 const game_panel_id = "game__panel";
+const reset_button_id = "reset_button";
 
 class Game {
   constructor() {
-    this.gameBoard = document.getElementById(game_panel_id);
+    this.gameBoard = document.querySelector(`section#${game_panel_id}`);
     this.gameBoardData = [];
     this.shipsData = [];
     this.initializeGame();
+    this.resetButton = document.getElementById(reset_button_id);
+    console.log(this.resetButton);
+    this.resetButton.addEventListener("click", this.startNewGame.bind(this));
   }
+
   initializeGame() {
     this.drawFieldsOnBoard();
+    const shipsPosition = new ShipsPosition();
     this.gameBoardData = shipsPosition.initialGameBoardData;
     this.getButtons();
     this.shipsData = shipsPosition.initialShipsGameData;
     this.statistics = new Stats(this.shipsData);
     this.statistics.initializeStats();
     this.statistics.renderStats();
+  }
+  startNewGame() {
+    this.gameBoard.innerHTML = "";
+    this.initializeGame();
   }
 
   drawFieldsOnBoard() {
@@ -61,8 +67,16 @@ class Game {
     const isDestroyed = this.statistics.updateStatistics(shipData);
     if (isDestroyed) {
       this.statistics.renderStats();
+      messege.singleShipDestroyedMessege(isDestroyed);
+
+      if (this.statistics.checkIfWin()) {
+        console.log("wygrałeś gre");
+        const finalBoard = messege.winMessege();
+        messege.renderMessege(finalBoard);
+      }
     }
   }
+
   checkIfRevealed(row, column, btn) {
     if (this.gameBoardData[row][column].isRevealed) return true;
     else {
