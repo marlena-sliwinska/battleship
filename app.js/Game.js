@@ -6,6 +6,7 @@ import Stats from "./Stats.js";
 import { game__single__field__className } from "./Field.js";
 import { game__border__raised__className } from "./Field.js";
 import { playAgainButtonId } from "./Messege.js";
+import { revealNeighbours } from "./RevealNeighbours.js";
 const game__border__pressed__className = "border-pressed";
 const game_panel_id = "game__panel";
 const reset_button_id = "reset_button";
@@ -26,11 +27,12 @@ class Game {
     this.gameBoardData = this.shipsPosition.initialGameBoardData;
     this.getButtons();
     this.shipsData = this.shipsPosition.initialShipsGameData;
-    console.log(this.shipsData);
     this.statistics = new Stats(this.shipsData);
     this.statistics.initializeStats();
     this.statistics.renderStats();
+    /*   this.revealNeighbours = revealNeighbours.revealShipBoundaries; */
   }
+
   startNewGame() {
     this.gameBoard.innerHTML = "";
     this.initializeGame();
@@ -68,7 +70,7 @@ class Game {
     const isDestroyed = this.statistics.updateStatistics(shipData);
     if (isDestroyed) {
       this.statistics.renderStats();
-      this.shipsPosition.revealShipBoundaries(shipData, this.shipsData);
+      revealNeighbours.revealShipBoundaries(shipData, this.gameBoardData);
       const hidingModalTimeoutIndex =
         messege.singleShipDestroyedMessege(isDestroyed);
 

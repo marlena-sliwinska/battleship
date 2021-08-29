@@ -1,6 +1,6 @@
 /* import { shipsPosition } from "./ShipsPosition.js"; */
 
-const box_on_game_board_withs_tats_id = "statistic board";
+const box_on_game_board_withs_tats_id = "statistic_board";
 
 class Stats {
   constructor(shipData) {

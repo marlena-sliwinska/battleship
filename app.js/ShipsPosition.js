@@ -21,7 +21,6 @@ export class ShipsPosition {
     });
     return data;
   }
-
   addShipsLocationsToSummary(id, field) {
     this.initialShipsGameData.forEach((data, index) => {
       if (data.shipId === id)
@@ -60,7 +59,6 @@ export class ShipsPosition {
     //przypisz rozmiar statku
     let fields = ship.size;
     let field = null;
-
     //znajdź pierwsze pole
     field = this.generateSingleIndex(ship);
     fields--;
@@ -72,8 +70,6 @@ export class ShipsPosition {
       field = this.findRemainShipFieldsLocations(jackpot, ship);
       fields--;
     }
-
-    //zbuduj granice statku
     this.generateShipBoundaries(ship);
   }
 
@@ -85,23 +81,31 @@ export class ShipsPosition {
   }
 
   generateShipBoundaries() {
+    console.log(this.initialGameBoardData);
     for (let row = 0; row < game_panel_size; row++) {
       for (let column = 0; column < game_panel_size; column++) {
         if (this.initialGameBoardData[row][column].isOccupied) {
+          const shipId = this.initialGameBoardData[row][column].shipId;
           const neighbours = this.findNeighbours(row, column);
           neighbours.forEach((neighbour) => {
             if (
               !this.initialGameBoardData[neighbour.row][neighbour.column]
                 .isOccupied
-            )
+            ) {
               this.initialGameBoardData[neighbour.row][
                 neighbour.column
               ].isNeighbour = true;
+
+              this.initialGameBoardData[neighbour.row][
+                neighbour.column
+              ].shipId = shipId;
+            }
           });
         }
       }
     }
   }
+
   generateAllShipsLocation() {
     const data = this.initialGameBoardData;
     this.shipsOnGame.forEach((ship) => {
@@ -115,14 +119,13 @@ export class ShipsPosition {
     const { name, id } = ship;
     if (
       !this.initialGameBoardData[row][column].isOccupied &&
-      !this.initialGameBoardData[row][column].isNeighbour
+      !this.initialGameBoardData[row][column].isNeighbour[0]
     ) {
       this.initialGameBoardData[row][column].isOccupied = true;
       this.initialGameBoardData[row][column].isNeighbour = false;
       this.initialGameBoardData[row][column].isRevealed = false;
       this.initialGameBoardData[row][column].shipId = id;
       this.initialGameBoardData[row][column].shipName = name;
-
       this.addShipsLocationsToSummary(id, field);
 
       return true;
@@ -320,5 +323,11 @@ export class ShipsPosition {
       ];
     }
     return neighbours;
+  }
+
+  findIndexByShipId(shipId, array) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].shipId === shipId) return i;
+    }
   }
 }
