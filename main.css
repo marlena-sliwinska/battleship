@@ -7,7 +7,17 @@
     --teal-blue: #517b85ff;
     --modal-board-color: #1b4349;
     --field-size: 3.5rem;
-    --field-border-width: 3px
+    --field-border-width: 3px;
+    --modal-width: 60vw;
+    --background-color: rgb(182, 187, 177);
+    }
+
+@media (max-width: 425px) {
+        :root {
+            --field-size: 2.2rem;
+            --modal-width: 100vw;
+            --field-border-width: 2px;
+        }
     }
     
 
@@ -28,7 +38,7 @@
     html {
         font-family: 'titillium';;
         box-sizing: border-box;
-        background-color: var(--pale-spring-bud);
+        background-color: var(--background-color);
     }
     
     *,*:before, *:after{
@@ -130,7 +140,7 @@
         opacity: 0.97;
         border-radius: 10px;
         box-shadow: 0 10px 50px 5px var(--darker-border-color);
-        width: 60vw;
+        width: var(--modal-width);
         min-height: 75vh;
         position: fixed;
         top: 50%;
@@ -186,4 +196,8 @@
         padding: 1.5px;
         width: 100%;
         height: 100%;
+    }
+
+    @media (max-width: 425px) {
+
     }
