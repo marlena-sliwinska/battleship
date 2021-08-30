@@ -9,7 +9,6 @@ class RevealNeighbours {
         const field = gameBoardData[row][column];
         if (field.isNeighbour && field.shipId.includes(shipData.shipId)) {
           const btn = document.querySelector(`[data-${row}_${column}]`);
-          console.log(btn);
           btn.classList.remove(game__border__raised__className);
           btn.classList.add(game__border__pressed__className);
           btn.classList.add(game_neighbour_button_className);

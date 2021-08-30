@@ -17,17 +17,17 @@
 
     @font-face {
         font-family: 'titillium';
-        src: url(/assets/fonts/TitilliumWeb-1eq2.ttf);
+        src: url(assets/fonts/TitilliumWeb-1eq2.ttf);
     }
 
     @font-face {
         font-family: 'starlight';
-        src: url(/assets/fonts/Starlight.ttf);
+        src: url(assets/fonts/Starlight.ttf);
     }    
 
     @font-face {
         font-family: 'dancingScripts';
-        src: url(/assets/fonts/DancingScript-VariableFont_wght.ttf);
+        src: url(assets/fonts/DancingScript-VariableFont_wght.ttf);
     }    
     html {
         font-family: 'titillium';;
@@ -101,13 +101,13 @@
         flex-shrink: 0;
       }
     .game__single-field--isOccupied {
-        background-image: url(/assets/images/ship.svg);
+        background-image: url(assets/images/ship.svg);
         background-position: center center;
         background-size: 80%;
         background-repeat: no-repeat
     }
     .game__single-field--isNeigbour {
-        background-image: url(/assets/images/wave.svg);
+        background-image: url(assets/images/wave.svg);
         background-position: center center;
         background-size: 60%;
         background-repeat: no-repeat;
