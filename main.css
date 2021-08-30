@@ -55,7 +55,8 @@
         align-items: center;
     }
     .game__header {
-     
+        margin-top: 50px;
+    
     } 
     .game__name {
 
@@ -198,6 +199,26 @@
         height: 100%;
     }
 
-    @media (max-width: 425px) {
+    @media (min-width: 1024px) {
+
+        .game {
+            min-height: 100vh;
+            display: grid;
+            grid-template-areas: "header header"
+            "main aside";
+
+        } 
+        .game__header{
+            grid-area: header;
+        }
+        .game__panel{
+            grid-area: main;
+ 
+        }
+        .game__summary-panel {
+            grid-area: aside;
+            margin-left: 25px;
+            margin-top: 25px;
+        }
 
     }
