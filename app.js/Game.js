@@ -19,7 +19,6 @@ class Game {
     this.initializeGame();
     this.resetButton = document.getElementById(reset_button_id);
     this.resetButton.addEventListener("click", this.startNewGame.bind(this));
-    /* this.buttons = null; */
   }
 
   initializeGame() {
@@ -31,7 +30,6 @@ class Game {
     this.statistics = new Stats(this.shipsData);
     this.statistics.initializeStats();
     this.statistics.renderStats();
-    /*   this.revealNeighbours = revealNeighbours.revealShipBoundaries; */
   }
 
   startNewGame() {
@@ -60,18 +58,25 @@ class Game {
     const row = e.target.getAttribute("data-row");
     const column = e.target.getAttribute("data-column");
     const alreadyRevealed = this.checkIfRevealed(row, column, e.target);
+
     if (alreadyRevealed) return;
+
     const isOccupied = this.checkIfElementIsOccupied(row, column, e.target);
+
     if (!isOccupied) return;
+
     const shipData = {
       shipId: this.gameBoardData[row][column].shipId,
       row: row,
       column: column,
     };
+
     const isDestroyed = this.statistics.updateStatistics(shipData);
+
     if (isDestroyed) {
       this.statistics.renderStats();
       revealNeighbours.revealShipBoundaries(shipData, this.gameBoardData);
+
       const hidingModalTimeoutIndex =
         messege.singleShipDestroyedMessege(isDestroyed);
 
@@ -80,7 +85,9 @@ class Game {
         clearTimeout(hidingModalTimeoutIndex);
         const finalBoard = messege.winMessege();
         messege.renderMessege(finalBoard);
+
         const btn = document.getElementById(playAgainButtonId);
+
         btn.addEventListener("click", () => {
           messege.clearMessegeBoard();
           this.startNewGame();

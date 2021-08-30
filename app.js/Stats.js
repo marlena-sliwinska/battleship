@@ -1,5 +1,3 @@
-/* import { shipsPosition } from "./ShipsPosition.js"; */
-
 const box_on_game_board_withs_tats_id = "statistic_board";
 
 class Stats {
@@ -7,7 +5,6 @@ class Stats {
     this.statBoard = document.getElementById(box_on_game_board_withs_tats_id);
     this.shipsOnBoardData = shipData;
     this.totalShipsOnBoard = null;
-    /*  this.currentlyDestroyedShipsOnBoard = null; */
     this.shipsByTypesStatistic = [];
   }
   initializeStats() {
@@ -24,12 +21,6 @@ class Stats {
       this.statBoard.appendChild(stat);
     });
   }
-
-  /* countAllNotDestroyedShips() {
-    this.shipsOnBoardData.forEach((ship) => {
-      if (ship.isDestroyed) this.currentlyDestroyedShipsOnBoard++;
-    });
-  } */
 
   summarizeShipsTypes() {
     const ships = this.shipsOnBoardData;

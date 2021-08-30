@@ -3,11 +3,7 @@
     --darker-border-color: rgb(6, 27, 34);
     --brighter-border-color: rgb(228, 228, 228);
     --basic-text-color: #d7eae3ff;
-    --dark-olive-green: #546732ff;
-    --lemon-curry: #b49104ff;
-    --antique-bronze: #6a6225ff;
-    --pale-spring-bud: #d9dabeff;
-    --xanadu: #747f5d;
+    --color-button: #0c0546;
     --teal-blue: #517b85ff;
     --modal-board-color: #1b4349;
     --field-size: 3.5rem;
@@ -43,20 +39,20 @@
     }
 
     body {
-        height: 100vh;
+        min-height: 100vh;
         display: flex;;
         justify-content: center;
         align-items: center;
     }
     .game__header {
-       /*  background-color: var(--brighter-border-color); */
+     
     } 
     .game__name {
 
         font-family: 'starlight';
         font-size: 48px;
         margin-bottom: 8px;
-   /*      text-shadow: 1px 1px var(--brighter-border-color) */
+ 
     }
 
     .game__catchword {
@@ -65,7 +61,7 @@
     }
     .game__button {
         border: none;
-        background: #404040;
+        background-color: var(--color-button);
         color: #ffffff; 
         font-weight: 100;
         font-size: 16px;
@@ -76,7 +72,7 @@
     }
 
     .game__button:hover {
-        color: #404040;
+        color: var(--color-button);
         background-color: #ffffff;
         letter-spacing: 2px;
         /* box-shadow: none | [inset? && [ <offset-x> <offset-y> <blur-radius>? <spread-radius>? <color>? ] ]# */

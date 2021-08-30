@@ -6,7 +6,6 @@ export class ShipsPosition {
     this.initialGameBoardData = this.createTemplateDataTable();
     this.initialShipsGameData = this.createShipsOnBoardSummary();
     this.generateAllShipsLocation();
-    /* this.showAll(); */
   }
   createShipsOnBoardSummary() {
     const data = [];
@@ -17,17 +16,11 @@ export class ShipsPosition {
         shipSize: item.size,
         shipCurrentLifes: item.size,
         isDestroyed: false,
-        occupiedFields: [],
       });
     });
     return data;
   }
-  addShipsLocationsToSummary(id, field) {
-    this.initialShipsGameData.forEach((data, index) => {
-      if (data.shipId === id)
-        this.initialShipsGameData[index].occupiedFields.push(field);
-    });
-  }
+
   createTemplateDataTable() {
     const data = [];
     for (let row = 0; row < game_panel_size; row++) {
@@ -100,7 +93,6 @@ export class ShipsPosition {
               this.initialGameBoardData[neighbour.row][
                 neighbour.column
               ].isNeighbour = true;
-
               if (
                 !this.initialGameBoardData[neighbour.row][neighbour.column]
                   .shipId
@@ -143,24 +135,9 @@ export class ShipsPosition {
       this.initialGameBoardData[row][column].isRevealed = false;
       this.initialGameBoardData[row][column].shipId = id;
       this.initialGameBoardData[row][column].shipName = name;
-      this.addShipsLocationsToSummary(id, field);
-
       return true;
     }
   }
-  /* 
-  showAll() {
-    for (let row = 0; row < game_panel_size; row++) {
-      for (let column = 0; column < game_panel_size; column++) {
-        const btn = document.querySelector(`[data-${row}_${column}]`);
-        console.log("show all");
-        if (this.initialGameBoardData[row][column].isOccupied)
-          btn.textContent = "X";
-        if (this.initialGameBoardData[row][column].isNeighbour)
-          btn.textContent = "*";
-      } 
-    }
-  }*/
 
   possibleNextIndex(x, y) {
     let jakpot = [];
