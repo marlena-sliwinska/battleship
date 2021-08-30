@@ -69,6 +69,7 @@ export class ShipsPosition {
       const jackpot = this.possibleNextIndex(field.row, field.column);
       // wylosuj kolejne pole
       field = this.findRemainShipFieldsLocations(jackpot, ship);
+      if (!field) throw new Error("ship generation failed");
       fields--;
     }
     this.generateShipBoundaries(ship);
@@ -76,13 +77,16 @@ export class ShipsPosition {
 
   findRemainShipFieldsLocations(jackpot, ship) {
     let field = null;
+    if (jackpot.length === 0) return false;
     field = jackpot[Math.floor(Math.random() * jackpot.length)];
     if (this.checkIfItsOccupied(field, ship)) return field;
-    else return this.findRemainShipFieldsLocations(jackpot, ship);
+    else {
+      const newJackpot = this.removeOneElementFromJackpot(jackpot, field);
+      return this.findRemainShipFieldsLocations(newJackpot, ship);
+    }
   }
 
   generateShipBoundaries() {
-    console.log(this.initialGameBoardData);
     for (let row = 0; row < game_panel_size; row++) {
       for (let column = 0; column < game_panel_size; column++) {
         if (this.initialGameBoardData[row][column].isOccupied) {
@@ -355,5 +359,9 @@ export class ShipsPosition {
     for (let i = 0; i < array.length; i++) {
       if (array[i].shipId === shipId) return i;
     }
+  }
+
+  removeOneElementFromJackpot(jackpot, field) {
+    return jackpot.filter((element) => element !== field);
   }
 }
