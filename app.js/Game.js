@@ -7,10 +7,10 @@ import { game__single__field__className } from "./Field.js";
 import { game__border__raised__className } from "./Field.js";
 import { playAgainButtonId } from "./Messege.js";
 import { revealNeighbours } from "./RevealNeighbours.js";
-const game__border__pressed__className = "border-pressed";
+export const game__border__pressed__className = "border-pressed";
 const game_panel_id = "game__panel";
 const reset_button_id = "reset_button";
-const shipImage = `<div class="svg"><svg class="svg"><use href="/assets/images/sprite.svg#ship"></use></svg>`;
+const shipImageBackgroundClassName = "game__single-field--isOccupied";
 class Game {
   constructor() {
     this.gameBoard = document.querySelector(`section#${game_panel_id}`);
@@ -19,6 +19,7 @@ class Game {
     this.initializeGame();
     this.resetButton = document.getElementById(reset_button_id);
     this.resetButton.addEventListener("click", this.startNewGame.bind(this));
+    /* this.buttons = null; */
   }
 
   initializeGame() {
@@ -101,7 +102,7 @@ class Game {
   checkIfElementIsOccupied(row, column, btn) {
     if (!this.gameBoardData[row][column].isOccupied) return false;
     else {
-      btn.innerHTML = shipImage;
+      btn.classList.add(shipImageBackgroundClassName);
       return true;
     }
   }

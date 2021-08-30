@@ -12,6 +12,7 @@ class Field {
     const field = document.createElement("div");
     field.setAttribute("data-row", `${row}`);
     field.setAttribute("data-column", `${column}`);
+    field.setAttribute(`data-${row}_${column}`, "");
     field.classList.add(game__single__field__className);
     field.classList.add(game__border__className);
     field.classList.add(game__border__raised__className);

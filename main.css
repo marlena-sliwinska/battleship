@@ -7,9 +7,9 @@
     --lemon-curry: #b49104ff;
     --antique-bronze: #6a6225ff;
     --pale-spring-bud: #d9dabeff;
-    --xanadu: #747f5dff;
+    --xanadu: #747f5d;
     --teal-blue: #517b85ff;
-    --modal-board-color: rgb(27, 67, 73);
+    --modal-board-color: #1b4349;
     --field-size: 3.5rem;
     --field-border-width: 3px
     }
@@ -99,7 +99,19 @@
         background-color: var(--basic-game-board-color);
         color: var(--basic-text-color);
         flex-shrink: 0;
- 
+      }
+    .game__single-field--isOccupied {
+        background-image: url(/assets/images/ship.svg);
+        background-position: center center;
+        background-size: 80%;
+        background-repeat: no-repeat
+    }
+    .game__single-field--isNeigbour {
+        background-image: url(/assets/images/wave.svg);
+        background-position: center center;
+        background-size: 60%;
+        background-repeat: no-repeat;
+        filter: blur(0.70px);
     }
     
 

@@ -6,6 +6,7 @@ export class ShipsPosition {
     this.initialGameBoardData = this.createTemplateDataTable();
     this.initialShipsGameData = this.createShipsOnBoardSummary();
     this.generateAllShipsLocation();
+    /* this.showAll(); */
   }
   createShipsOnBoardSummary() {
     const data = [];
@@ -96,9 +97,21 @@ export class ShipsPosition {
                 neighbour.column
               ].isNeighbour = true;
 
-              this.initialGameBoardData[neighbour.row][
-                neighbour.column
-              ].shipId = shipId;
+              if (
+                !this.initialGameBoardData[neighbour.row][neighbour.column]
+                  .shipId
+              )
+                this.initialGameBoardData[neighbour.row][
+                  neighbour.column
+                ].shipId = [shipId];
+              else if (
+                !this.initialGameBoardData[neighbour.row][
+                  neighbour.column
+                ].shipId.includes(shipId)
+              )
+                this.initialGameBoardData[neighbour.row][
+                  neighbour.column
+                ].shipId.push(shipId);
             }
           });
         }
@@ -119,7 +132,7 @@ export class ShipsPosition {
     const { name, id } = ship;
     if (
       !this.initialGameBoardData[row][column].isOccupied &&
-      !this.initialGameBoardData[row][column].isNeighbour[0]
+      !this.initialGameBoardData[row][column].isNeighbour
     ) {
       this.initialGameBoardData[row][column].isOccupied = true;
       this.initialGameBoardData[row][column].isNeighbour = false;
@@ -131,6 +144,19 @@ export class ShipsPosition {
       return true;
     }
   }
+  /* 
+  showAll() {
+    for (let row = 0; row < game_panel_size; row++) {
+      for (let column = 0; column < game_panel_size; column++) {
+        const btn = document.querySelector(`[data-${row}_${column}]`);
+        console.log("show all");
+        if (this.initialGameBoardData[row][column].isOccupied)
+          btn.textContent = "X";
+        if (this.initialGameBoardData[row][column].isNeighbour)
+          btn.textContent = "*";
+      } 
+    }
+  }*/
 
   possibleNextIndex(x, y) {
     let jakpot = [];
