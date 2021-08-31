@@ -1,4 +1,4 @@
-import { game__border__pressed__className } from "./Game.js";
+import { game__button__pressed__className } from "./Game.js";
 import { game_panel_size } from "./ShipsPosition.js";
 import { game__border__raised__className } from "./Field.js";
 const game_neighbour_button_className = "game__single-field--isNeigbour";
@@ -10,7 +10,7 @@ class RevealNeighbours {
         if (field.isNeighbour && field.shipId.includes(shipData.shipId)) {
           const btn = document.querySelector(`[data-${row}_${column}]`);
           btn.classList.remove(game__border__raised__className);
-          btn.classList.add(game__border__pressed__className);
+          btn.classList.add(game__button__pressed__className);
           btn.classList.add(game_neighbour_button_className);
         }
       }

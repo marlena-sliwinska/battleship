@@ -7,7 +7,7 @@ import { game__single__field__className } from "./Field.js";
 import { game__border__raised__className } from "./Field.js";
 import { playAgainButtonId } from "./Messege.js";
 import { revealNeighbours } from "./RevealNeighbours.js";
-export const game__border__pressed__className = "border-pressed";
+export const game__button__pressed__className = "button-pressed";
 const game_panel_id = "game__panel";
 const reset_button_id = "reset_button";
 const shipImageBackgroundClassName = "game__single-field--isOccupied";
@@ -100,7 +100,7 @@ class Game {
     if (this.gameBoardData[row][column].isRevealed) return true;
     else {
       btn.classList.remove(game__border__raised__className);
-      btn.classList.add(game__border__pressed__className);
+      btn.classList.add(game__button__pressed__className);
       this.gameBoardData[row][column].isRevealed = true;
       return false;
     }
