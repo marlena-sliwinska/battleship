@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,14 +12,14 @@
 <body>
     <main class="game">
         <header class="game__header">
-        <h1 class="game__name">The Battleship</h1>
-        <hr>
-        <h2 class="game__catchword">Crash and destroy the enemy!</h2>
-        <button id="reset_button" class="game__button">RESET</button>
+            <h1 class="game__name">The Battleship</h1>
+            <hr>
+            <h2 class="game__catchword">Crash and destroy the enemy!</h2>
+            <button id="reset_button" class="game__button">RESET</button>
         </header>
-       
+
         <section class="game__panel" id="game__panel">
-            
+
         </section>
 
 
@@ -26,17 +27,23 @@
             <article>
                 <h2>Statistics:</h2>
                 <div id="statistic_board">
-                  </div>
+                </div>
+
+            </article>
+            <article class="game__summary-counter">
+                <div>Shots fired quantity: <span id="shots_quantity"></span></div>
+
             </article>
         </footer>
 
 
-       
-        
+
+
     </main>
     <div class="game__messege inactive" id="result_messege">
 
     </div>
     <script src="index.js" type="module"></script>
 </body>
+
 </html>

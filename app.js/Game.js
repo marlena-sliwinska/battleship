@@ -11,6 +11,7 @@ export const game__button__pressed__className = "button-pressed";
 const game_panel_id = "game__panel";
 const reset_button_id = "reset_button";
 const shipImageBackgroundClassName = "game__single-field--isOccupied";
+const shots_fired_quantity_id = "shots_quantity";
 class Game {
   constructor() {
     this.gameBoard = document.querySelector(`section#${game_panel_id}`);
@@ -19,6 +20,7 @@ class Game {
     this.initializeGame();
     this.resetButton = document.getElementById(reset_button_id);
     this.resetButton.addEventListener("click", this.startNewGame.bind(this));
+    this.movesCounter = null;
   }
 
   initializeGame() {
@@ -30,6 +32,8 @@ class Game {
     this.statistics = new Stats(this.shipsData);
     this.statistics.initializeStats();
     this.statistics.renderStats();
+    this.movesCounter = 0;
+    this.renderMovesCounter();
   }
 
   startNewGame() {
@@ -60,7 +64,7 @@ class Game {
     const alreadyRevealed = this.checkIfRevealed(row, column, e.target);
 
     if (alreadyRevealed) return;
-
+    this.renderMovesCounter();
     const isOccupied = this.checkIfElementIsOccupied(row, column, e.target);
 
     if (!isOccupied) return;
@@ -112,6 +116,11 @@ class Game {
       btn.classList.add(shipImageBackgroundClassName);
       return true;
     }
+  }
+  renderMovesCounter() {
+    this.movesCounter++;
+    const counter = document.getElementById(shots_fired_quantity_id);
+    counter.innerText = this.movesCounter;
   }
 }
 
