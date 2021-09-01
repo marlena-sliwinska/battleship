@@ -1,3 +1,3 @@
-console.log("This is war 🚢");
+import { game } from './app.js/Game.js';
 
-import { game } from "./app.js/Game.js";
+console.log('This is war 🚢');

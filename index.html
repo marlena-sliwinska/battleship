@@ -1,50 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Battleship</title>
-    <link href="main.css" rel="stylesheet">
-</head>
+    <link href="main.css" rel="stylesheet" />
+  </head>
 
-<body>
+  <body>
     <main class="game">
-        <header class="game__header">
-            <h1 class="game__name">The Battleship</h1>
-            <hr>
-            <h2 class="game__catchword">Crash and destroy the enemy!</h2>
-            <button id="reset_button" class="game__button">RESET</button>
-            <img class="game__logo" src="assets/images/anchor.svg">
-        </header>
+      <header class="game__header">
+        <h1 class="game__name">The Battleship</h1>
+        <hr />
+        <h2 class="game__catchword">Crash and destroy the enemy!</h2>
+        <button id="reset_button" class="game__button">RESET</button>
+        <img class="game__logo" src="assets/images/anchor.svg" />
+      </header>
 
-        <section class="game__panel" id="game__panel">
+      <section class="game__panel" id="game__panel"></section>
 
-        </section>
-
-
-        <footer class="game__summary-panel">
-            <article class="game__summary-stats">
-                <h2>Statistics:</h2>
-                <div id="statistic_board">
-                </div>
-
-            </article>
-            <article class="game__summary-counter">
-                <div>Shots fired quantity: <span id="shots_quantity"></span></div>
-
-            </article>
-        </footer>
-
-
-
-
+      <footer class="game__summary-panel">
+        <article class="game__summary-stats">
+          <h2>Statistics:</h2>
+          <div id="statistic_board"></div>
+        </article>
+        <article class="game__summary-counter">
+          <div>Shots fired quantity: <span id="shots_quantity"></span></div>
+        </article>
+      </footer>
     </main>
-    <div class="game__messege inactive" id="result_messege">
-
-    </div>
+    <div class="game__messege inactive" id="result_messege"></div>
     <script src="index.js" type="module"></script>
-</body>
-
+  </body>
 </html>

@@ -1,5 +1,6 @@
+import { shipsTypes } from './data/shipsTypes.js';
+
 export const game_panel_size = 10;
-import { shipsTypes } from "./data/shipsTypes.js";
 export class ShipsPosition {
   constructor() {
     this.shipsOnGame = shipsTypes;
@@ -7,6 +8,7 @@ export class ShipsPosition {
     this.initialShipsGameData = this.createShipsOnBoardSummary();
     this.generateAllShipsLocation();
   }
+
   createShipsOnBoardSummary() {
     const data = [];
     shipsTypes.forEach((item) => {
@@ -46,23 +48,23 @@ export class ShipsPosition {
     };
     if (this.checkIfItsOccupied(field, ship)) {
       return field;
-    } else return this.generateSingleIndex(ship);
+    } return this.generateSingleIndex(ship);
   }
 
   generateSingleShipLocation(ship) {
-    //przypisz rozmiar statku
+    // przypisz rozmiar statku
     let fields = ship.size;
     let field = null;
-    //znajdź pierwsze pole
+    // znajdź pierwsze pole
     field = this.generateSingleIndex(ship);
     fields--;
-    //znajdz pozostałe pola
+    // znajdz pozostałe pola
     while (fields > 0) {
       // utwórz zbiór w którym powinienes szukać kolejnego pola
       const jackpot = this.possibleNextIndex(field.row, field.column);
       // wylosuj kolejne pole
       field = this.findRemainShipFieldsLocations(jackpot, ship);
-      if (!field) throw new Error("ship generation failed");
+      if (!field) throw new Error('ship generation failed');
       fields--;
     }
     this.generateShipBoundaries(ship);
@@ -73,17 +75,16 @@ export class ShipsPosition {
     if (jackpot.length === 0) return false;
     field = jackpot[Math.floor(Math.random() * jackpot.length)];
     if (this.checkIfItsOccupied(field, ship)) return field;
-    else {
-      const newJackpot = this.removeOneElementFromJackpot(jackpot, field);
-      return this.findRemainShipFieldsLocations(newJackpot, ship);
-    }
+
+    const newJackpot = this.removeOneElementFromJackpot(jackpot, field);
+    return this.findRemainShipFieldsLocations(newJackpot, ship);
   }
 
   generateShipBoundaries() {
     for (let row = 0; row < game_panel_size; row++) {
       for (let column = 0; column < game_panel_size; column++) {
         if (this.initialGameBoardData[row][column].isOccupied) {
-          const shipId = this.initialGameBoardData[row][column].shipId;
+          const { shipId } = this.initialGameBoardData[row][column];
           const neighbours = this.findNeighbours(row, column);
           neighbours.forEach((neighbour) => {
             if (
@@ -96,18 +97,19 @@ export class ShipsPosition {
               if (
                 !this.initialGameBoardData[neighbour.row][neighbour.column]
                   .shipId
-              )
+              ) {
                 this.initialGameBoardData[neighbour.row][
                   neighbour.column
                 ].shipId = [shipId];
-              else if (
+              } else if (
                 !this.initialGameBoardData[neighbour.row][
                   neighbour.column
                 ].shipId.includes(shipId)
-              )
+              ) {
                 this.initialGameBoardData[neighbour.row][
                   neighbour.column
                 ].shipId.push(shipId);
+              }
             }
           });
         }
@@ -127,8 +129,8 @@ export class ShipsPosition {
     const { row, column } = field;
     const { name, id } = ship;
     if (
-      !this.initialGameBoardData[row][column].isOccupied &&
-      !this.initialGameBoardData[row][column].isNeighbour
+      !this.initialGameBoardData[row][column].isOccupied
+      && !this.initialGameBoardData[row][column].isNeighbour
     ) {
       this.initialGameBoardData[row][column].isOccupied = true;
       this.initialGameBoardData[row][column].isNeighbour = false;
@@ -143,189 +145,190 @@ export class ShipsPosition {
     let jakpot = [];
     if (x == 0 && y == 0) {
       jakpot = [
-        //right
+        // right
         { row: x + 1, column: y },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
       ];
     } else if (x == 0 && y == game_panel_size - 1) {
       jakpot = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //right
+        // right
         { row: x + 1, column: y },
       ];
     } else if (x == game_panel_size - 1 && y == game_panel_size - 1) {
       jakpot = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //left
+        // left
         { row: x - 1, column: y },
       ];
     } else if (x == game_panel_size - 1 && y == 0) {
       jakpot = [
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //left
+        // left
         { row: x - 1, column: y },
       ];
     } else if (x == 0) {
       jakpot = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //right
+        // right
         { row: x + 1, column: y },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
       ];
     } else if (y == game_panel_size - 1) {
       jakpot = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //right
+        // right
         { row: x + 1, column: y },
-        //left
+        // left
         { row: x - 1, column: y },
       ];
     } else if (x == game_panel_size - 1) {
       jakpot = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //left
+        // left
         { row: x - 1, column: y },
       ];
     } else if (y == 0) {
       jakpot = [
-        //right
+        // right
         { row: x + 1, column: y },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //left
+        // left
         { row: x - 1, column: y },
       ];
     } else {
       jakpot = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //right
+        // right
         { row: x + 1, column: y },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //left
+        // left
         { row: x - 1, column: y },
       ];
     }
     return jakpot;
   }
+
   findNeighbours(x, y) {
     let neighbours = [];
     if (x == 0 && y == 0) {
       neighbours = [
-        //right
+        // right
         { row: x + 1, column: y },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //corner
+        // corner
         { row: x + 1, column: y + 1 },
       ];
     } else if (x == 0 && y == game_panel_size - 1) {
       neighbours = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //right
+        // right
         { row: x + 1, column: y },
-        //corner
+        // corner
         { row: x + 1, column: y - 1 },
       ];
     } else if (x == game_panel_size - 1 && y == game_panel_size - 1) {
       neighbours = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //left
+        // left
         { row: x - 1, column: y },
-        //corner
+        // corner
         { row: x - 1, column: y - 1 },
       ];
     } else if (x == game_panel_size - 1 && y == 0) {
       neighbours = [
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //left
+        // left
         { row: x - 1, column: y },
-        //corner
+        // corner
         { row: x - 1, column: y + 1 },
       ];
     } else if (x == 0) {
       neighbours = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //right
+        // right
         { row: x + 1, column: y },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //corner
+        // corner
         { row: x + 1, column: y - 1 },
-        //corner
+        // corner
         { row: x + 1, column: y + 1 },
       ];
     } else if (y == game_panel_size - 1) {
       neighbours = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //right
+        // right
         { row: x + 1, column: y },
-        //left
+        // left
         { row: x - 1, column: y },
-        //corner
+        // corner
         { row: x + 1, column: y - 1 },
-        //corner
+        // corner
         { row: x - 1, column: y - 1 },
       ];
     } else if (x == game_panel_size - 1) {
       neighbours = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //left
+        // left
         { row: x - 1, column: y },
-        //corner
+        // corner
         { row: x - 1, column: y + 1 },
-        //corner
+        // corner
         { row: x - 1, column: y - 1 },
       ];
     } else if (y == 0) {
       neighbours = [
-        //right
+        // right
         { row: x + 1, column: y },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //left
+        // left
         { row: x - 1, column: y },
-        //corner
+        // corner
         { row: x + 1, column: y + 1 },
-        //corner
+        // corner
         { row: x - 1, column: y + 1 },
       ];
     } else {
       neighbours = [
-        //up
+        // up
         { row: x, column: y - 1 },
-        //right
+        // right
         { row: x + 1, column: y },
-        //bottom
+        // bottom
         { row: x, column: y + 1 },
-        //left
+        // left
         { row: x - 1, column: y },
-        //corner
+        // corner
         { row: x - 1, column: y - 1 },
-        //corner
+        // corner
         { row: x - 1, column: y + 1 },
-        //corner
+        // corner
         { row: x + 1, column: y + 1 },
-        //corner
+        // corner
         { row: x + 1, column: y - 1 },
       ];
     }

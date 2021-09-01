@@ -1,0 +1,27 @@
+{
+  "name": "00_battleship_v0.2",
+  "version": "1.0.0",
+  "description": "The Battleship is a game built in **Vanilla JS** with **Object Oriented Programming**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "node_modules/.bin/eslint .",
+    "lint:fix": "node_modules/.bin/eslint . --fix",
+    "cow": "npx cowsay"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marlena-sliwinska/battleship.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marlena-sliwinska/battleship/issues"
+  },
+  "homepage": "https://github.com/marlena-sliwinska/battleship#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2"
+  }
+}

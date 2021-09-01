@@ -7,11 +7,13 @@ class Stats {
     this.totalShipsOnBoard = null;
     this.shipsByTypesStatistic = [];
   }
+
   initializeStats() {
     this.currentlyDestroyedShipsOnBoard = 0;
     this.totalShipsOnBoard = this.shipsOnBoardData.length;
     this.shipsByTypesStatistic = this.countTotalShipsByType();
   }
+
   renderStats() {
     this.statBoard.innerHTML = `<h3>You have destroyed ${this.currentlyDestroyedShipsOnBoard} from ${this.totalShipsOnBoard} ships.</h3>
     <h4>In details:</h4>`;
@@ -68,10 +70,9 @@ class Stats {
     });
     return isDestroyed;
   }
+
   checkIfWin() {
-    return this.currentlyDestroyedShipsOnBoard === this.totalShipsOnBoard
-      ? true
-      : false;
+    return this.currentlyDestroyedShipsOnBoard === this.totalShipsOnBoard;
   }
 }
 

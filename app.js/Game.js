@@ -1,12 +1,15 @@
-import { messege } from "./Messege.js";
-import { field } from "./Field.js";
-import { game_panel_size } from "./ShipsPosition.js";
-import { ShipsPosition } from "./ShipsPosition.js";
+import { messege, playAgainButtonId } from "./Messege.js";
+import {
+  field,
+  game__single__field__className,
+  game__border__raised__className,
+} from "./Field.js";
+import { game_panel_size, ShipsPosition } from "./ShipsPosition.js";
+
 import Stats from "./Stats.js";
-import { game__single__field__className } from "./Field.js";
-import { game__border__raised__className } from "./Field.js";
-import { playAgainButtonId } from "./Messege.js";
+
 import { revealNeighbours } from "./RevealNeighbours.js";
+
 export const game__button__pressed__className = "button-pressed";
 const game_panel_id = "game__panel";
 const reset_button_id = "reset_button";
@@ -54,16 +57,18 @@ class Game {
     const buttons = document.getElementsByClassName(
       game__single__field__className
     );
-    for (let button of buttons) {
+    for (const button of buttons) {
       button.addEventListener("click", (e) => this.checkThisField(e));
     }
   }
+
   checkThisField(e) {
     const row = e.target.getAttribute("data-row");
     const column = e.target.getAttribute("data-column");
     const alreadyRevealed = this.checkIfRevealed(row, column, e.target);
 
     if (alreadyRevealed) return;
+    this.movesCounter++;
     this.renderMovesCounter();
     const isOccupied = this.checkIfElementIsOccupied(row, column, e.target);
 
@@ -71,8 +76,8 @@ class Game {
 
     const shipData = {
       shipId: this.gameBoardData[row][column].shipId,
-      row: row,
-      column: column,
+      row,
+      column,
     };
 
     const isDestroyed = this.statistics.updateStatistics(shipData);
@@ -102,23 +107,21 @@ class Game {
 
   checkIfRevealed(row, column, btn) {
     if (this.gameBoardData[row][column].isRevealed) return true;
-    else {
-      btn.classList.remove(game__border__raised__className);
-      btn.classList.add(game__button__pressed__className);
-      this.gameBoardData[row][column].isRevealed = true;
-      return false;
-    }
+
+    btn.classList.remove(game__border__raised__className);
+    btn.classList.add(game__button__pressed__className);
+    this.gameBoardData[row][column].isRevealed = true;
+    return false;
   }
 
   checkIfElementIsOccupied(row, column, btn) {
     if (!this.gameBoardData[row][column].isOccupied) return false;
-    else {
-      btn.classList.add(shipImageBackgroundClassName);
-      return true;
-    }
+
+    btn.classList.add(shipImageBackgroundClassName);
+    return true;
   }
+
   renderMovesCounter() {
-    this.movesCounter++;
     const counter = document.getElementById(shots_fired_quantity_id);
     counter.innerText = this.movesCounter;
   }

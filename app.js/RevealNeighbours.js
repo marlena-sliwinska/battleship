@@ -1,7 +1,8 @@
-import { game__button__pressed__className } from "./Game.js";
-import { game_panel_size } from "./ShipsPosition.js";
-import { game__border__raised__className } from "./Field.js";
-const game_neighbour_button_className = "game__single-field--isNeigbour";
+import { game__button__pressed__className } from './Game.js';
+import { game_panel_size } from './ShipsPosition.js';
+import { game__border__raised__className } from './Field.js';
+
+const game_neighbour_button_className = 'game__single-field--isNeigbour';
 class RevealNeighbours {
   revealShipBoundaries(shipData, gameBoardData) {
     for (let row = 0; row < game_panel_size; row++) {
