@@ -4,14 +4,16 @@
     --darker-border-color: rgb(6, 45, 58);
     --brighter-border-color: rgb(203, 215, 218);
     --basic-text-color: #d7eae3ff;
-    --color-button: #0c0546;
-    --counter-board: #050646;
+    --color-button: #052746;
+    --counter-board: #052746;
     --teal-blue: #517b85ff;
     --modal-board-color: #1b4349;
     --field-size: 3.5rem;
     --field-border-width: 3px;
     --modal-width: 60vw;
-    --background-color: rgb(182, 187, 177);
+    --background-color: rgb(234, 234, 241);
+    --game-padding: 20px;
+    --game-panel-size: calc(10 * var(--field-size) + calc(2* var(--game-padding)));
 }
 
 @media (max-width: 425px) {
@@ -78,7 +80,6 @@ body {
     font-family: 'starlight';
     font-size: 48px;
     margin-bottom: 8px;
-
 }
 
 .game__catchword {
@@ -107,19 +108,25 @@ body {
     ;
     /* property name | duration | easing function | delay */
     transition: all 0.5s ease-out;
+}
 
+.game__logo {
+    left: 80%;
+    top: 5%;
+    width: 80px;
+    position: sticky;
 }
 
 .game__panel {
-
-    width: calc(10*var(--field-size));
+    width: var(--game-panel-size);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    height: calc(10*var(--field-size));
-
-    box-shadow: 0 1px 15px 15px #5c767c;
+    height: var(--game-panel-size);
+    background-color: var(--counter-board);
+    box-shadow: 0 1px 15px 2px var(--counter-board);
+    margin-bottom: 15px;
 }
 
 .game__single-field {
@@ -188,8 +195,6 @@ body {
     padding: 40px;
     text-shadow: #ffffff 1px 0 1.5px;
     letter-spacing: 2px;
-
-
 }
 
 .game__textMessage--quote {
@@ -233,6 +238,13 @@ body {
     box-shadow: 0 1px 10px 2px #404040;
 }
 
+.game__summary-stats {
+    background-color: white;
+    color: var(--counter-board);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 10px 2px #404040;
+}
 
 .inactive {
     display: none;
