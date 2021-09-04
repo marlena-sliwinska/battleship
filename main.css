@@ -1,17 +1,17 @@
 :root {
-  --basic-game-board-color: rgb(76, 127, 145);
-  --pressed-button-color: rgb(117, 156, 172);
+  --basic-game-board-color: #004864;
+  --pressed-button-color: rgb(129, 180, 187);
   --darker-border-color: rgb(6, 45, 58);
-  --brighter-border-color: rgb(203, 215, 218);
+  --brighter-border-color: rgb(225, 236, 238);
   --basic-text-color: #d7eae3ff;
   --color-button: #052746;
   --counter-board: #052746;
   --teal-blue: #517b85ff;
   --modal-board-color: #1b4349;
+  --game-border-color: rgba(117, 157, 172, 0.596);
   --field-size: 3.5rem;
   --field-border-width: 3px;
   --modal-width: 60vw;
-  --background-color: rgb(234, 234, 241);
   --game-padding: 20px;
   --game-panel-size: calc(
     10 * var(--field-size) + calc(2 * var(--game-padding))
@@ -20,9 +20,10 @@
 
 @media (max-width: 425px) {
   :root {
-    --field-size: 2.2rem;
+    --field-size: 1.9rem;
     --modal-width: 100vw;
     --field-border-width: 2px;
+    --game-panel-size: calc(10 * var(--field-size));
   }
 }
 
@@ -44,9 +45,13 @@
 html {
   font-family: "titillium";
   box-sizing: border-box;
-  background-color: var(--background-color);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 113, 99, 1) 0%,
+    rgba(135, 203, 120, 1) 21%,
+    rgba(0, 116, 139, 1) 100%
+  );
 }
-
 *,
 *:before,
 *:after,
@@ -120,7 +125,7 @@ body {
   justify-content: center;
   align-content: center;
   height: var(--game-panel-size);
-  background-color: var(--counter-board);
+  background-color: var(--game-border-color);
   box-shadow: 0 1px 15px 2px var(--counter-board);
   margin-bottom: 15px;
 }
