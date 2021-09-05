@@ -10,7 +10,7 @@
   --modal-board-color: #1b4349;
   --game-border-color: rgba(117, 157, 172, 0.596);
   --field-size: 3.5rem;
-  --field-border-width: 3px;
+  --field-border-width: 2.3px;
   --modal-width: 60vw;
   --game-padding: 20px;
   --game-panel-size: calc(
@@ -116,8 +116,8 @@ body {
   background-color: var(--color-button);
   color: #ffffff;
   font-weight: 100;
-  font-size: 16px;
-  padding: 15px;
+  font-size: 18px;
+  padding: 16px;
   border-radius: 6px;
   margin-bottom: 16px;
   -webkit-transition: all 0.5s ease-out;
@@ -271,8 +271,8 @@ body {
 
 .game__summary-counter {
   font-weight: 100;
-  font-size: 16px;
-  padding: 15px;
+  font-size: 18px;
+  padding: 16px;
   border-radius: 6px;
   margin-bottom: 16px;
   margin-top: 20px;
